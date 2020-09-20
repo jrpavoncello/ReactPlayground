@@ -5,10 +5,11 @@ import PersonInputProps from './PersonInputProps';
 
 const PersonInputComp: React.FC<PersonInputProps> = (props) => {
 
-	const onFinish = (values: {name: string, age: number}) => {
-		props.onPersonAdded({ 
+	const onFinish = (values: {Name: string, Age: number}) => {
+		props.onPersonAdded({
+			Id: props.getCountPeople(),
 			...values,
-			hobbies:''
+			Hobbies: ''
 		});
 	};
 	  

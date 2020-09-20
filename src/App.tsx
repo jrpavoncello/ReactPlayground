@@ -20,37 +20,44 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		addPersonHandler({
-			name: "Josh",
-			age: 27,
-			hobbies: "My hobbies include development, snowboarding, skateboarding, drums, guitar, gaming."
+			Id: 1,
+			Name: "Josh",
+			Age: 27,
+			Hobbies: "My hobbies include development, snowboarding, skateboarding, drums, guitar, gaming."
 		});
 	
 		addPersonHandler({
-			name: "Kiersten",
-			age: 28,
-			hobbies: ""
+			Id: 2,
+			Name: "Kiersten",
+			Age: 28,
+			Hobbies: ""
 		});
 	
 		addPersonHandler({
-			name: "YourMom",
-			age: 60,
-			hobbies: "Gaining weight."
+			Id: 3,
+			Name: "YourMom",
+			Age: 60,
+			Hobbies: "Gaining weight."
 		});
 	}, [] /* run only once */)
 
-	const onPersonChangedHandler = (event: ChangeEvent<HTMLInputElement>) => {
-		const currentName = event.target.value;
-		
+	const onPersonChangedHandler = (event: ChangeEvent<HTMLInputElement>, personId: number) => {
+		const personChanging = state.people.find(p => p.Id === personId);
+		if(personChanging) {
+			personChanging.Name = event.target.value;
+		}
 	};
+
+	const getCountPeople = () => state.people.length;
 	
 	return (
 		<div className="App">
 			<h1>Henlo, fren.</h1>
-			<PersonInputComp onPersonAdded={addPersonHandler} />
+			<PersonInputComp onPersonAdded={addPersonHandler} getCountPeople={getCountPeople} />
 			{
 				state.people.map((person) => {
 					return (
-						<PersonComp key={person.name} name={person.name} age={person.age} onChange={onPersonChangedHandler}>{person.hobbies}</PersonComp>
+						<PersonComp key={person.Id} name={person.Name} age={person.Age} onChange={(event) => onPersonChangedHandler(event, person.Id)}>{person.Hobbies}</PersonComp>
 					);
 				})
 			}

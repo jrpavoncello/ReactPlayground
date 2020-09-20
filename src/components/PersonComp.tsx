@@ -5,9 +5,9 @@ import PersonProps from './PersonProps';
 const PersonComp: React.FC<PersonProps> = (props) => {
     return (
         <div className="Person">
-            <input className="person-name" value={props.name} onChange={props.onChange} />
-            <input type="text" value={props.age} onChange={props.onChange} />
-            <input style={props.children ? {} : {visibility:"collapse"}} value={props.children?.valueOf().toString()} onChange={props.onChange} />
+            <input className="person-name" defaultValue={props.name} onChange={props.onChange} />
+            <input type="text" defaultValue={props.age.toString()} onChange={props.onChange} />
+            <input style={props.children ? {} : {visibility:"collapse"}} defaultValue={props.children?.valueOf().toString()} onChange={props.onChange} />
         </div>
     );
 }

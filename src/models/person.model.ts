@@ -1,7 +1,8 @@
 interface Person {
-    name: string,
-    age: number,
-    hobbies: string
+	Id: number,
+    Name: string,
+    Age: number,
+    Hobbies: string
 }
 
 export default Person;
