@@ -2,6 +2,16 @@ import React from 'react';
 import './PersonInput.css';
 import {Form, Input, InputNumber, Button} from 'antd';
 import PersonInputProps from './PersonInputProps';
+import Radium from 'radium';
+
+const layout = {
+	labelCol: { span: 4 },
+	wrapperCol: { span: 8 },
+};
+
+const tailLayout = {
+	wrapperCol: { offset: 4, span: 4 },
+};
 
 const PersonInputComp: React.FC<PersonInputProps> = (props) => {
 
@@ -15,9 +25,11 @@ const PersonInputComp: React.FC<PersonInputProps> = (props) => {
 	  
     return (
 		<Form 
+			{...layout}
 			className="PersonInput"
 			onFinish={onFinish}>
 			<Form.Item 
+				{...layout}
 				label="Name" 
 				name="name"
 				fieldKey="name"
@@ -34,11 +46,11 @@ const PersonInputComp: React.FC<PersonInputProps> = (props) => {
 					{ type: 'number', min: 0, message: 'Age must be greater than 0' },
 					{ type: 'number', max: 120, message: 'Age must be less than 120' }]
 				}><InputNumber /></Form.Item>
-			<Form.Item>
+			<Form.Item {...tailLayout}>
 				<Button type="primary" htmlType="submit">Submit</Button>
 			</Form.Item>
-        </Form>
+		</Form>
     );
 }
 
-export default PersonInputComp;
+export default Radium(PersonInputComp);

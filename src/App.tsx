@@ -3,6 +3,8 @@ import PersonComp from './components/PersonComp';
 import './App.css';
 import Person from './models/person.model'
 import PersonInputComp from './components/PersonInputComp';
+import Radium from 'radium';
+import 'antd/dist/antd.css'
 // import { Route } from 'react-router-dom';
 
 type AppState = {
@@ -41,7 +43,7 @@ const App: React.FC = () => {
 		});
 	}, [] /* run only once */)
 
-	const onPersonChangedHandler = (event: ChangeEvent<HTMLInputElement>, personId: number) => {
+	const onPersonChangedHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, personId: number) => {
 		const personChanging = state.people.find(p => p.Id === personId);
 		if(personChanging) {
 			personChanging.Name = event.target.value;
@@ -57,7 +59,13 @@ const App: React.FC = () => {
 			{
 				state.people.map((person) => {
 					return (
-						<PersonComp key={person.Id} name={person.Name} age={person.Age} onChange={(event) => onPersonChangedHandler(event, person.Id)}>{person.Hobbies}</PersonComp>
+						<PersonComp 
+							key={person.Id} 
+							name={person.Name} 
+							age={person.Age} 
+							onInputChange={(event) => onPersonChangedHandler(event, person.Id)}>
+								{person.Hobbies}
+						</PersonComp>
 					);
 				})
 			}
@@ -65,4 +73,4 @@ const App: React.FC = () => {
 	);
 };
 
-export default App;
+export default Radium(App);

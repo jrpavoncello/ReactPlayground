@@ -3,7 +3,7 @@ import { ChangeEvent } from "react";
 interface PersonProps {
     name: string,
 	age: number,
-	onChange: (event: ChangeEvent<HTMLInputElement>) => void
+	onInputChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
 
 export default PersonProps;
