@@ -23,11 +23,11 @@ const PersonComp: React.FC<PersonProps> = (props) => {
         <div className="Person">
             <div>
 				<div>Name</div>
-				<input className="person-name" defaultValue={props.name} onChange={props.onInputChange} />
+				<input className="person-name" defaultValue={props.Name} onChange={props.onInputChange} />
 			</div>
             <div>
 				<div>Age</div>
-            	<input type="text" defaultValue={props.age.toString()} onChange={props.onInputChange} />
+            	<input type="text" defaultValue={props.Age.toString()} onChange={props.onInputChange} />
 			</div>
             {hobbies}
         </div>

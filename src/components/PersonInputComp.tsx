@@ -15,10 +15,11 @@ const tailLayout = {
 
 const PersonInputComp: React.FC<PersonInputProps> = (props) => {
 
-	const onFinish = (values: {Name: string, Age: number}) => {
+	const onFinish = (values: {name: string, age: number}) => {
 		props.onPersonAdded({
-			Id: props.getCountPeople(),
-			...values,
+			Id: props.getCountPeople() + 1,
+			Name: values.name,
+			Age: values.age,
 			Hobbies: ''
 		});
 	};

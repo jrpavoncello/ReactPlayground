@@ -61,8 +61,8 @@ const App: React.FC = () => {
 					return (
 						<PersonComp 
 							key={person.Id} 
-							name={person.Name} 
-							age={person.Age} 
+							Name={person.Name}
+							Age={person.Age}
 							onInputChange={(event) => onPersonChangedHandler(event, person.Id)}>
 								{person.Hobbies}
 						</PersonComp>
