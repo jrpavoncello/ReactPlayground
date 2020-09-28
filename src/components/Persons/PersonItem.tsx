@@ -2,10 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input, InputNumber } from "antd";
 import './Person.css';
-import PersonProps from './PersonProps';
-import { nameof } from '../nameof';
+import { nameof } from '../../nameof';
+import Person from './Person.model';
 
-const PersonComp: React.FC<PersonProps> = (props) => {
+interface PersonItemProps {
+    Name: string,
+	Age: number,
+	onInputChange(value: number | string, mapper: (person: Person) => string): void
+}
+
+const PersonItem: React.FC<PersonItemProps> = (props) => {
 	
 	const textareaStyle = {
 		width: '100%'
@@ -52,4 +58,4 @@ const PersonDiv = styled.div`
 		width: 550px;
 	}`;
 
-export default PersonComp;
+export default PersonItem;

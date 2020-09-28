@@ -1,10 +1,15 @@
 import React from "react";
 import "./PersonInput.css";
 import { Form, Input, InputNumber, Button } from "antd";
-import PersonInputProps from "./PersonInputProps";
+import Person from './Person.model';
 import styled from "styled-components";
 
-const PersonInputComp: React.FC<PersonInputProps> = (props) => {
+interface PersonInputProps {
+	onPersonAdded: (person: Person) => void;
+	getCountPeople: () => number;
+}
+
+const PersonInput: React.FC<PersonInputProps> = (props) => {
 	const onFinish = (values: { name: string; age: number }) => {
 		props.onPersonAdded({
 			Id: props.getCountPeople() + 1,
@@ -95,4 +100,4 @@ const StyledButton = styled(Button)`
 	}
 `;
 
-export default PersonInputComp;
+export default PersonInput;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import PersonComp from './components/PersonComp';
 import './App.css';
-import Person from './models/person.model';
-import PersonInputComp from './components/PersonInputComp';
+import PersonInput from '../components/Persons/PersonInput';
+import PersonList from '../components/Persons/PersonList';
+import Person from '../components/Persons/Person.model';
 import 'antd/dist/antd.css';
 
 const App: React.FC = () => {
@@ -12,6 +12,13 @@ const App: React.FC = () => {
 		setState(previousState => { 
 			return { people:[...previousState.people, person] };
 		});
+	};
+
+	const onPersonChangedHandler = (value: number | string, mapper: (person: Person) => string, personId: number) => {
+		const personChanging = state.people.find(p => p.Id === personId) as any;
+		if(personChanging) {
+			personChanging[mapper(personChanging)] = value;
+		}
 	};
 
 	useEffect(() => {
@@ -37,32 +44,16 @@ const App: React.FC = () => {
 		});
 	}, [] /* run only once */)
 
-	const onPersonChangedHandler = (value: number | string, mapper: (person: Person) => string, personId: number) => {
-		const personChanging = state.people.find(p => p.Id === personId) as any;
-		if(personChanging) {
-			personChanging[mapper(personChanging)] = value;
-		}
-	};
-
 	const getCountPeople = () => state.people.length;
 	
 	return (
 		<div className="App">
 			<h1>Henlo, fren.</h1>
-			<PersonInputComp onPersonAdded={addPersonHandler} getCountPeople={getCountPeople} />
-			{
-				state.people.map((person) => {
-					return (
-						<PersonComp 
-							key={person.Id} 
-							Name={person.Name}
-							Age={person.Age}
-							onInputChange={(value, mapper) => onPersonChangedHandler(value, mapper, person.Id)}>
-								{person.Hobbies}
-						</PersonComp>
-					);
-				})
-			}
+			<PersonInput onPersonAdded={addPersonHandler} getCountPeople={getCountPeople} />
+			<PersonList
+				people={state.people}
+				onInputChange={onPersonChangedHandler}>
+			</PersonList>
 		</div>
 	);
 };
