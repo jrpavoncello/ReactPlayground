@@ -1,15 +1,9 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import PersonComp from './components/PersonComp';
 import './App.css';
-import Person from './models/person.model'
+import Person from './models/person.model';
 import PersonInputComp from './components/PersonInputComp';
-import Radium from 'radium';
-import 'antd/dist/antd.css'
-// import { Route } from 'react-router-dom';
-
-type AppState = {
-  people:Person[]
-}
+import 'antd/dist/antd.css';
 
 const App: React.FC = () => {
 	let [state, setState] = useState({ people:Array<Person>() });
@@ -73,4 +67,4 @@ const App: React.FC = () => {
 	);
 };
 
-export default Radium(App);
+export default App;

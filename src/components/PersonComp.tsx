@@ -1,10 +1,14 @@
 import React from 'react';
-import './Person.css';
+import styled from 'styled-components';
+// import './Person.css';
 import PersonProps from './PersonProps';
-import Radium from 'radium';
 
 const PersonComp: React.FC<PersonProps> = (props) => {
 	
+	const textareaStyle = {
+		width: '100%'
+	};
+
 	let hobbies = null;
 	if(props.children) {
 		hobbies = (
@@ -14,13 +18,13 @@ const PersonComp: React.FC<PersonProps> = (props) => {
 					defaultValue={props.children?.valueOf().toString()} 
 					onChange={props.onInputChange}
 					rows={3}
-					cols={80} />
+					style={textareaStyle} />
 			</div>
 		);
 	}
-	
+
     return (
-        <div className="Person">
+		<PersonDiv>
             <div>
 				<div>Name</div>
 				<input className="person-name" defaultValue={props.Name} onChange={props.onInputChange} />
@@ -30,8 +34,20 @@ const PersonComp: React.FC<PersonProps> = (props) => {
             	<input type="text" defaultValue={props.Age.toString()} onChange={props.onInputChange} />
 			</div>
             {hobbies}
-        </div>
+		</PersonDiv>
     );
 }
 
-export default Radium(PersonComp);
+const PersonDiv = styled.div`
+	width: 80%;
+	margin: 16px auto;
+	border: 1px solid #eee;
+	box-shadow: 0 2px 3px #ccc;
+	padding: 16px;
+	text-align: center;
+
+	@media (min-width: 575px) {
+		width: 550px;
+	}`;
+
+export default PersonComp;
