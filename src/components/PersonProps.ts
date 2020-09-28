@@ -1,9 +1,9 @@
-import { ChangeEvent } from "react";
+import Person from "../models/person.model";
 
 interface PersonProps {
     Name: string,
 	Age: number,
-	onInputChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+	onInputChange(value: number | string, mapper: (person: Person) => string): void
 }
 
 export default PersonProps;

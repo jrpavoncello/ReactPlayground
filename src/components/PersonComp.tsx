@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-// import './Person.css';
+import { Input, InputNumber } from "antd";
+import './Person.css';
 import PersonProps from './PersonProps';
+import { nameof } from '../nameof';
 
 const PersonComp: React.FC<PersonProps> = (props) => {
 	
@@ -16,7 +18,7 @@ const PersonComp: React.FC<PersonProps> = (props) => {
 				<div>Hobbies</div>
 				<textarea 
 					defaultValue={props.children?.valueOf().toString()} 
-					onChange={props.onInputChange}
+					onChange={(event) => props.onInputChange(event.target.value, (person) => nameof<typeof person>("Hobbies"))}
 					rows={3}
 					style={textareaStyle} />
 			</div>
@@ -27,11 +29,11 @@ const PersonComp: React.FC<PersonProps> = (props) => {
 		<PersonDiv>
             <div>
 				<div>Name</div>
-				<input className="person-name" defaultValue={props.Name} onChange={props.onInputChange} />
+				<Input className="person-name" defaultValue={props.Name} onChange={(event) => props.onInputChange(event.target.value, (person) => nameof<typeof person>("Name"))} />
 			</div>
             <div>
 				<div>Age</div>
-            	<input type="text" defaultValue={props.Age.toString()} onChange={props.onInputChange} />
+            	<InputNumber defaultValue={props.Age} onChange={(value) => props.onInputChange(value as number, (person) => nameof<typeof person>("Age"))} />
 			</div>
             {hobbies}
 		</PersonDiv>
@@ -44,7 +46,7 @@ const PersonDiv = styled.div`
 	border: 1px solid #eee;
 	box-shadow: 0 2px 3px #ccc;
 	padding: 16px;
-	text-align: center;
+	text-align: left;
 
 	@media (min-width: 575px) {
 		width: 550px;

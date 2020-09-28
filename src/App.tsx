@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import PersonComp from './components/PersonComp';
 import './App.css';
 import Person from './models/person.model';
@@ -37,10 +37,10 @@ const App: React.FC = () => {
 		});
 	}, [] /* run only once */)
 
-	const onPersonChangedHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, personId: number) => {
-		const personChanging = state.people.find(p => p.Id === personId);
+	const onPersonChangedHandler = (value: number | string, mapper: (person: Person) => string, personId: number) => {
+		const personChanging = state.people.find(p => p.Id === personId) as any;
 		if(personChanging) {
-			personChanging.Name = event.target.value;
+			personChanging[mapper(personChanging)] = value;
 		}
 	};
 
@@ -57,7 +57,7 @@ const App: React.FC = () => {
 							key={person.Id} 
 							Name={person.Name}
 							Age={person.Age}
-							onInputChange={(event) => onPersonChangedHandler(event, person.Id)}>
+							onInputChange={(value, mapper) => onPersonChangedHandler(value, mapper, person.Id)}>
 								{person.Hobbies}
 						</PersonComp>
 					);

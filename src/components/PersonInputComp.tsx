@@ -51,9 +51,9 @@ const PersonInputComp: React.FC<PersonInputProps> = (props) => {
 					<InputNumber style={{float: 'left'}}/>
 				</Form.Item>
 				<Form.Item wrapperCol={{ offset: 2, span: 8 }}>
-					<Button type="primary" htmlType="submit" style={{float: 'left'}}>
+					<StyledButton type="primary" htmlType="submit" style={{float: 'left'}}>
 						Submit
-					</Button>
+					</StyledButton>
 				</Form.Item>
 			</Form>
 		</PersonInputDiv>
@@ -78,6 +78,20 @@ const StyledInput = styled(Input)`
 	@media (max-width: 575px) {
 		max-width: 100%;
 		flex: 1 1;
+	}
+`;
+
+const StyledButton = styled(Button)`
+	background-color: green;
+	color: white;
+	font: inherit;
+	border: 1px solid blue;
+	padding: 8px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: lightgreen;
+		color: black;
 	}
 `;
 
